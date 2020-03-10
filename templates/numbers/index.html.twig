@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Znajdź największą liczbę{% endblock %}
+{% block card_header %}Podaj liczby z przedziału: <br/> 1 ≤ "twoja ​liczba" ​≤ 99 999{% endblock %}
+{% block content %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {{ form_row(form.content) }}
+        </div>
+        <div class="col-12">
+            {{ form_widget(form.save, { 'label': 'Prześlij' }) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+    {% if results is defined %}
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Dane wejściowe</th>
+                    <th scope="col">Dane wyjściowe</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for result in results %}
+                    <tr>
+                        <td>{{ result.input }}</td>
+                        <td>{{ result.output }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}
